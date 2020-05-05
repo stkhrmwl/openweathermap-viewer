@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { StyleSheet, View, ActivityIndicator } from 'react-native';
+import { StyleSheet, View, Text, Image, ActivityIndicator } from 'react-native';
 
 // components
 import { getCurrentWeather } from '../components/WeatherService';
@@ -19,16 +19,30 @@ export default function WeatherScreen() {
 
   const { main, iconURL } = current;
 
-  if (current == null) {
-    return (<View style={styles.container}><ActivityIndicator /></View>);
+  if (main == '') {
+    return (
+      <View style={styles.container}>
+        <ActivityIndicator />
+      </View>);
   }
 
   return (
     <View style={styles.container}>
+      <Text style={styles.text}>{main}</Text>
+      <Image source={{ uri: iconURL }} style={styles.icon} />
     </View>
   );
 }
 const styles = StyleSheet.create({
   container: {
+    flex: 1,
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+  text: {
+  },
+  icon: {
+    width: 100,
+    height: 100,
   },
 });
